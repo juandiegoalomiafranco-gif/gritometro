@@ -41,6 +41,8 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "Gritómetro · Noraver Garganta",
   description: "Grita todo lo que quieras. Noraver protege tu garganta.",
+  // App de kiosco: no debe indexarse.
+  robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
