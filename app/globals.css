@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta Noraver Garganta (Tecnoquimica) — unica fuente de color */
+  --color-bg: #001226;
+  --color-bg-dark: #001f3f;
+  --color-surface: #00284d;
+  --color-text: #ffffff;
+  --color-primary: #003d7a;
+  --color-secondary: #0066cc;
+  --color-accent: #00b8d9;
+  --color-highlight: #7fdbff;
+  --color-glow: #00e5ff;
+  --color-success: #00ffb2;
+  --color-brand-green: #8dc63f;
+
+  --font-sans: var(--font-body), "Montserrat", ui-sans-serif, system-ui,
+    sans-serif;
+}
+
+/*
+ * Display corporativa: Archivo variable con eje de anchura condensado.
+ * Alta, uppercase, line-height compacto — sensacion editorial/clinica.
+ */
+.font-display {
+  font-family: var(--font-display), "Archivo", ui-sans-serif, sans-serif;
+  font-stretch: 76%;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+/* Wordmark de empaque: redondeada extra-bold (Baloo 2). */
+.font-brand {
+  font-family: var(--font-brand), "Baloo 2", ui-sans-serif, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Trazo manuscrito del sello tQ (Caveat). */
+.font-script {
+  font-family: var(--font-script), "Caveat", cursive;
+  font-weight: 700;
+}
+
+/* Numeros de instrumento: condensados + tabulares (no "tiemblan"). */
+.font-score {
+  font-family: var(--font-display), "Archivo", ui-sans-serif, sans-serif;
+  font-stretch: 80%;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  /* Degradado vertical corporativo Noraver */
+  background: linear-gradient(
+    180deg,
+    var(--color-bg) 0%,
+    var(--color-bg-dark) 100%
+  );
+  background-attachment: fixed;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  /* Kiosk: sin scroll, sin seleccion, sin menu de seleccion de texto */
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Grano sutil sobre el degradado (acabado cinematografico). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Oculta el cursor en modo totem; en desarrollo se ve normal con :hover */
+@media (pointer: coarse) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Numeros con ancho fijo para que el dB no "tiemble" al cambiar */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Accesibilidad: foco visible para navegacion por teclado */
+:focus-visible {
+  outline: 2px solid var(--color-glow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
